@@ -1,11 +1,16 @@
 import pygame
 from sys import exit
 
+# Components
+from game import Game
+from score import Score
+from preview import Preview
+
 from settings import *
 
 
 class Main:
-    def __init__(self) -> None:
+    def __init__(self):
         # general
         pygame.init()
 
@@ -14,6 +19,11 @@ class Main:
         self.clock = pygame.time.Clock()
 
         pygame.display.set_caption('🗿 TETRIS 🗿')
+
+        # Components
+        self.game = Game()
+        self.score = Score()
+        self.preview = Preview()
 
     def run(self):
         while True:
@@ -24,6 +34,11 @@ class Main:
 
             # display
             self.display_surface.fill(GRAY)
+
+            # Components
+            self.game.run()
+            self.score.run()
+            self.preview.run()
 
             # updating the game
             pygame.display.update()
