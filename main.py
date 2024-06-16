@@ -2,9 +2,9 @@ import pygame
 from sys import exit
 
 # Components
-from game import Game
-from score import Score
-from preview import Preview
+from components.Game import Game
+from components.Score import Score
+from components.Preview import Preview
 
 from settings import *
 
