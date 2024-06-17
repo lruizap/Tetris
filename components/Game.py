@@ -2,7 +2,7 @@ import pygame
 from random import choice
 
 # Components
-from components.tetrominos.Block import Block
+from components.Timer import Timer
 from components.tetrominos.Tetromino import Tetromino
 
 from settings import *
@@ -31,6 +31,19 @@ class Game:
         self.tetromino = Tetromino(shape=choice(
             list(TETROMINOS.keys())), group=self.sprites)
 
+        # timer
+        self.timers = {
+            'vertical move': Timer(UPDATE_START_SPEED, True, self.move_down)
+        }
+        self.timers['vertical move'].activate()
+
+    def timer_update(self):
+        for timer in self.timers.values():
+            timer.update()
+
+    def move_down(self):
+        self.tetromino.move_down()
+
     def draw_grid(self):
         for col in range(1, COLUMNS):
             x = col * CELL_SIZE
@@ -45,6 +58,10 @@ class Game:
         self.surface.blit(self.line_surface, (0, 0))
 
     def run(self):
+
+        # update
+        self.timer_update()
+        self.sprites.update()
 
         # drawing
         self.surface.fill(GRAY)

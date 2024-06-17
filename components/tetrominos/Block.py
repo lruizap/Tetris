@@ -14,6 +14,8 @@ class Block(pygame.sprite.Sprite):
 
         # position
         self.pos = pygame.Vector2(pos) + BLOCK_OFFSET
-        x = self.pos.x * CELL_SIZE
-        y = self.pos.y * CELL_SIZE
-        self.rect = self.image.get_rect(topleft=(x, y))
+        self.rect = self.image.get_rect(topleft=self.pos * CELL_SIZE)
+
+    def update(self):
+        # self.pos -> rect
+        self.rect.topleft = self.pos * CELL_SIZE

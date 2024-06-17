@@ -17,3 +17,7 @@ class Tetromino:
         # Instancia dentro de la clase Block para cada una de las posiciones del diccionario de TETROMINOS
         self.blocks = [Block(group=group, pos=pos, color=self.color)
                        for pos in self.block_positions]
+
+    def move_down(self):
+        for block in self.blocks:
+            block.pos.y += 1
