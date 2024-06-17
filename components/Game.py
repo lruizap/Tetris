@@ -28,8 +28,12 @@ class Game:
         self.line_surface.set_alpha(120)
 
         # tetromino
-        self.tetromino = Tetromino(shape=choice(
-            list(TETROMINOS.keys())), group=self.sprites)
+        self.field_data = [[0 for x in range(COLUMNS)] for y in range(ROWS)]
+        self.tetromino = Tetromino(
+            shape=choice(list(TETROMINOS.keys())),
+            group=self.sprites,
+            create_new_tetromino=self.create_new_tetromino,
+            field_data=self.field_data)
 
         # timer
         self.timers = {
@@ -37,6 +41,13 @@ class Game:
             'horizontal move': Timer(MOVE_WAIT_TIME)
         }
         self.timers['vertical move'].activate()
+
+    def create_new_tetromino(self):
+        self.tetromino = Tetromino(
+            shape=choice(list(TETROMINOS.keys())),
+            group=self.sprites,
+            create_new_tetromino=self.create_new_tetromino,
+            field_data=self.field_data)
 
     def timer_update(self):
         for timer in self.timers.values():
