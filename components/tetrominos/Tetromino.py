@@ -18,10 +18,24 @@ class Tetromino:
         self.blocks = [Block(group=group, pos=pos, color=self.color)
                        for pos in self.block_positions]
 
+    # collisions
+    def next_move_horizontal_collide(self, blocks, amount):
+        collision_list = [block.horizontal_collide(
+            int(block.pos.x + amount)) for block in self.blocks]
+        return True if any(collision_list) else False
+
+    def next_move_vertical_collide(self, blocks, amount):
+        collision_list = [block.vertical_collide(
+            int(block.pos.y + amount)) for block in self.blocks]
+        return True if any(collision_list) else False
+
+    # movement
     def move_horizontal(self, amount):
-        for block in self.blocks:
-            block.pos.x += amount
+        if not self.next_move_horizontal_collide(self.blocks, amount):
+            for block in self.blocks:
+                block.pos.x += amount
 
     def move_down(self):
-        for block in self.blocks:
-            block.pos.y += 1
+        if not self.next_move_vertical_collide(self.blocks, 1):
+            for block in self.blocks:
+                block.pos.y += 1

@@ -16,6 +16,14 @@ class Block(pygame.sprite.Sprite):
         self.pos = pygame.Vector2(pos) + BLOCK_OFFSET
         self.rect = self.image.get_rect(topleft=self.pos * CELL_SIZE)
 
+    def horizontal_collide(self, x):
+        if not 0 <= x < COLUMNS:
+            return True
+
+    def vertical_collide(self, y):
+        if y >= ROWS:
+            return True
+
     def update(self):
         # self.pos -> rect
         self.rect.topleft = self.pos * CELL_SIZE
