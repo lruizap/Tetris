@@ -18,6 +18,10 @@ class Tetromino:
         self.blocks = [Block(group=group, pos=pos, color=self.color)
                        for pos in self.block_positions]
 
+    def move_horizontal(self, amount):
+        for block in self.blocks:
+            block.pos.x += amount
+
     def move_down(self):
         for block in self.blocks:
             block.pos.y += 1
