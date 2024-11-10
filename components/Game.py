@@ -9,7 +9,7 @@ from settings import *
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, get_next_shape):
 
         # general
         self.surface = pygame.Surface((GAME_WIDTH, GAME_HEIGHT))
@@ -19,6 +19,9 @@ class Game:
 
         # sprites
         self.sprites = pygame.sprite.Group()
+
+        # game connection
+        self.get_next_shape = get_next_shape
 
         # lines
         self.line_surface = self.surface.copy()
@@ -46,7 +49,7 @@ class Game:
     def create_new_tetromino(self):
         self.check_finished_rows()
         self.tetromino = Tetromino(
-            shape=choice(list(TETROMINOS.keys())),
+            shape=self.get_next_shape(),
             group=self.sprites,
             create_new_tetromino=self.create_new_tetromino,
             field_data=self.field_data)

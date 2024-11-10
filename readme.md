@@ -58,3 +58,4 @@ Las contribuciones son bienvenidas. Si encuentras algún error o tienes alguna m
 ## Créditos
 
 Desarrollado por [lruizap](https://github.com/lruizap).
+Tutorial de [Net Ninja](https://www.youtube.com/@NetNinja).

@@ -22,12 +22,12 @@ class Tetromino:
     # collisions
     def next_move_horizontal_collide(self, blocks, amount):
         collision_list = [block.horizontal_collide(
-            int(block.pos.x + amount), self.field_data) for block in self.blocks]
+            int(block.pos.x + amount), self.field_data) for block in blocks]
         return True if any(collision_list) else False
 
     def next_move_vertical_collide(self, blocks, amount):
         collision_list = [block.vertical_collide(
-            int(block.pos.y + amount), self.field_data) for block in self.blocks]
+            int(block.pos.y + amount), self.field_data) for block in blocks]
         return True if any(collision_list) else False
 
     # movement
