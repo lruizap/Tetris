@@ -38,7 +38,8 @@ class Game:
         # timer
         self.timers = {
             'vertical move': Timer(UPDATE_START_SPEED, True, self.move_down),
-            'horizontal move': Timer(MOVE_WAIT_TIME)
+            'horizontal move': Timer(MOVE_WAIT_TIME),
+            'rotate': Timer(ROTATE_WAIT_TIME)
         }
         self.timers['vertical move'].activate()
 
@@ -80,6 +81,12 @@ class Game:
             if keys[pygame.K_RIGHT]:
                 self.tetromino.move_horizontal(1)
                 self.timers['horizontal move'].activate()
+
+        # check for rotation
+        if not self.timers['rotate'].active:
+            if keys[pygame.K_UP]:
+                self.tetromino.rotate()
+                self.timers['rotate'].activate()
 
     def check_finished_rows(self):
 
